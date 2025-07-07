@@ -28,9 +28,6 @@ public class viewLogin extends JFrame {
 	public JButton btn_ok;
 	public JButton btn_cancel;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -44,10 +41,6 @@ public class viewLogin extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
 	public viewLogin() {
 		setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		setTitle("Login");

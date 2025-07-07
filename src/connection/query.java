@@ -8,19 +8,24 @@ public class query extends connection{
 	//INSERT, UPDATE, DELETE
 	public boolean queryUpdate(String senSQL) {
 		try {
-			stmt= (Statement) openConn().createStatement();
-			stmt.executeUpdate(senSQL);
+			if (openConn() != null) {
+				stmt= (Statement) conn.createStatement();
+				stmt.executeUpdate(senSQL);
+				return closeConn();
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.err.println("Error en la actualizacion de la bbdd"+e);
 		}
-		return closeConn();
+		return false;
 	}
 	//SELECT
 	public ResultSet queryRest(String senSQL) {
 		try {
-			stmt=(Statement)openConn().createStatement();
-			res= stmt.executeQuery(senSQL);
+			if (openConn() != null) {
+				stmt=(Statement)conn.createStatement();
+				res= stmt.executeQuery(senSQL);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.err.println("Error al consultar la bbdd");

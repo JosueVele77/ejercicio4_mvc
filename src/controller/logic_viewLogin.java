@@ -15,13 +15,8 @@ import view.viewControlPanel;
 import view.viewLogin;
 
 public class logic_viewLogin implements ActionListener, parametrizable{
-	//delegado de la clase viewLogin del paquete view
 	private viewLogin vl;
-	
-	//Crear instancia de la clase userDAO
-//	private userDAO udao;
 	private userDAO2 udao;
-	//Crear instancia de la clase viewControlPanel
 	private viewControlPanel vcp;
 	
 	public logic_viewLogin(viewLogin vl) {
@@ -37,7 +32,6 @@ public class logic_viewLogin implements ActionListener, parametrizable{
 		// TODO Auto-generated method stub
 		if(e.getSource()==vl.btn_ok) {
 			if(validateField()) {
-//				JOptionPane.showMessageDialog(vl, "\tCredenciales Correctas","Login",JOptionPane.INFORMATION_MESSAGE);
 			}else {
 				JOptionPane.showMessageDialog(vl, "\tCredenciales incorrectas","Login",JOptionPane.WARNING_MESSAGE);
 			}
@@ -53,20 +47,18 @@ public class logic_viewLogin implements ActionListener, parametrizable{
 		List <user> users=new ArrayList<>() ;
 //		try {
 			users= udao.getUser();
-//		}catch(IOException e) {
-//			JOptionPane.showMessageDialog(vl, "Problemas con conexioón","Login",JOptionPane.ERROR_MESSAGE);
+
 //		}
 		for(user u:users) {
 			if(user.equals(u.getUser())&& psw.equals(u.getPsw())) {
 				viewControlPanel vcp= new viewControlPanel();
 				switch(u.getType()) {
 				case 1:
-//					System.out.println("Usuario Administrador");
+
 					vcp.rollAdministrador();
 					
 					break;
 				case 2:
-//					System.out.println("Usuario vendedor");
 					vcp.rollVendedor();
 					
 					break;
@@ -81,12 +73,4 @@ public class logic_viewLogin implements ActionListener, parametrizable{
 		}
 		return false;
 	}
-//	private String formatText(char[] password) {
-//		String cadena="";
-//		for(char c:password) {
-//			cadena+=String.valueOf(c);
-//		}
-//		return cadena;
-//	}
-	
 }

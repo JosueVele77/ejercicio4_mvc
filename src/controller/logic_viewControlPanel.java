@@ -85,13 +85,6 @@ public class logic_viewControlPanel implements ActionListener,parametrizable {
 		}else {
 			return false;
 		}
-			
-		/**
-		 * cuando usamos enJTextField
-		 * vcp.txt_RegisterPSW.getText().equals(vcp.txt_confirmarPSW.getText();
-		 */
-		
-		
 	}
 
 	private void loadElementsComboBox() {

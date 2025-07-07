@@ -8,8 +8,8 @@ import javax.swing.table.DefaultTableModel;
 import model.employeed;
 import model.employeedDAO;
 import view.viewControlPanel;
-import javax.swing.event.ChangeEvent; // ¡Añade esta línea!
-import javax.swing.event.ChangeListener; // ¡Añade esta línea!
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class logic_employeed implements ActionListener {
     private viewControlPanel vcp;
@@ -20,13 +20,9 @@ public class logic_employeed implements ActionListener {
         this.vcp = vcp;
         this.edao = new employeedDAO();
 
-        // Puedes añadir un botón para "Cargar Empleados" o cargarlos automáticamente al seleccionar la pestaña
-        // Por ahora, implementaremos la carga automática cuando la pestaña sea visible o al inicio.
-        // Para una carga automática al inicio:
         loadEmployeedsTable();
 
-        // Para cargar cuando se selecciona la pestaña (requiere un ChangeListener en JTabbedPane):
-        vcp.tabbedPane.addChangeListener(new ChangeListener() { // Cambiado a clase anónima para mayor compatibilidad si usas una versión antigua de Java
+        vcp.tabbedPane.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 if (vcp.tabbedPane.getSelectedComponent() == vcp.getPn_employeed()) {
@@ -34,26 +30,17 @@ public class logic_employeed implements ActionListener {
                 }
             }
         });
-        // También puedes usar la expresión lambda si tu versión de Java lo permite (Java 8 o superior):
-        // vcp.tabbedPane.addChangeListener(e -> {
-        //     if (vcp.tabbedPane.getSelectedComponent() == vcp.pn_employeed) {
-        //         loadEmployeedsTable();
-        //     }
-        // });
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Aquí puedes añadir lógica para botones específicos de la pestaña de empleados si los creas
     }
 
     public void loadEmployeedsTable() {
         DefaultTableModel model = vcp.model_employeeds;
-        // Limpiar el modelo existente
         model.setRowCount(0);
-        model.setColumnCount(0); // Limpiar columnas existentes
+        model.setColumnCount(0);
 
-        // Definir los nombres de las columnas
         model.addColumn("ID");
         model.addColumn("Nombre");
         model.addColumn("DNI");
@@ -66,8 +53,6 @@ public class logic_employeed implements ActionListener {
         List<employeed> employeeds = edao.getAllEmployeeds();
 
         if (employeeds.isEmpty()) {
-            // Opcional: Mostrar un mensaje si no hay empleados
-            // JOptionPane.showMessageDialog(vcp, "No se encontraron empleados.", "Consulta de Empleados", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 

@@ -17,22 +17,22 @@ public class userDAO2 {
 
 	public userDAO2() {
 		super();
-		//AYUDAAAAAAAA
-		u=new user(null, null, 0);
+		// AYUDAAAAAAAA - Removed the problematic initialization here
 	}
-	
+
 	public List<user> getUser(){
 		List <user> users=new ArrayList<>();
-		ResultSet res= q.queryRest("SELECT * FROM tienda_p66.user;");
+		ResultSet res= q.queryRest("SELECT * FROM tiendap66.user;");
 		try {
-			while(res.next()) {
-				u=new user(null, null, 0);
-				u.setUser(res.getString(2));
-				u.setPsw(res.getString(3));
-				u.setType(res.getInt(4));
-				users.add(u);
+			// Verificar si el ResultSet es nulo antes de intentar usarlo
+			if (res != null) {
+				while(res.next()) {
+					// Create a new user object for each row
+					user currentUser = new user(res.getString(2), res.getString(3), res.getInt(4));
+					users.add(currentUser);
+				}
+				q.closeConn();
 			}
-			q.closeConn();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

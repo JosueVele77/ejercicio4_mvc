@@ -22,13 +22,12 @@ public class logic_product implements ActionListener {
         vcp.btn_productDelete.addActionListener(this);
         vcp.btn_productConsult.addActionListener(this);
 
-        // Cargar productos al inicio o al seleccionar la pestaña
         vcp.tabbedPane.addChangeListener(e -> {
             if (vcp.tabbedPane.getSelectedComponent() == vcp.getPn_product()) {
                 loadProductsTable();
             }
         });
-        loadProductsTable(); // Cargar al inicio por si la pestaña de productos es la inicial
+        loadProductsTable();
     }
 
     @Override
@@ -40,7 +39,7 @@ public class logic_product implements ActionListener {
         } else if (e.getSource() == vcp.btn_productDelete) {
             deleteProduct();
         } else if (e.getSource() == vcp.btn_productConsult) {
-            consultProducts(); // Este método ahora llenará la JTable
+            consultProducts();
         }
     }
 
@@ -57,7 +56,7 @@ public class logic_product implements ActionListener {
             if (pdao.addProduct()) {
                 JOptionPane.showMessageDialog(vcp, "Producto insertado exitosamente.", "Gestión de Productos", JOptionPane.INFORMATION_MESSAGE);
                 clearFields();
-                loadProductsTable(); // Recargar la tabla después de insertar
+                loadProductsTable();
             } else {
                 JOptionPane.showMessageDialog(vcp, "Fallo al insertar producto.", "Gestión de Productos", JOptionPane.ERROR_MESSAGE);
             }
@@ -92,7 +91,7 @@ public class logic_product implements ActionListener {
                 if (pdao.updateProduct()) {
                     JOptionPane.showMessageDialog(vcp, "Producto actualizado exitosamente.", "Gestión de Productos", JOptionPane.INFORMATION_MESSAGE);
                     clearFields();
-                    loadProductsTable(); // Recargar la tabla después de actualizar
+                    loadProductsTable();
                 } else {
                     JOptionPane.showMessageDialog(vcp, "Fallo al actualizar producto.", "Gestión de Productos", JOptionPane.ERROR_MESSAGE);
                 }
@@ -146,18 +145,15 @@ public class logic_product implements ActionListener {
     }
 
     private void consultProducts() {
-        // El botón "Consultar" ahora llamará a loadProductsTable para mostrar los datos en la tabla
         loadProductsTable();
         JOptionPane.showMessageDialog(vcp, "Productos consultados y mostrados en la tabla.", "Consulta de Productos", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void loadProductsTable() {
         DefaultTableModel model = vcp.model_products;
-        // Limpiar el modelo existente
         model.setRowCount(0);
-        model.setColumnCount(0); // Limpiar columnas existentes
+        model.setColumnCount(0);
 
-        // Definir los nombres de las columnas
         model.addColumn("ID");
         model.addColumn("Nombre");
         model.addColumn("Código");
@@ -169,8 +165,6 @@ public class logic_product implements ActionListener {
         List<product> products = pdao.getAllProducts();
 
         if (products.isEmpty()) {
-            // Opcional: Mostrar un mensaje si no hay productos
-            // JOptionPane.showMessageDialog(vcp, "No se encontraron productos.", "Consulta de Productos", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 

@@ -3,7 +3,7 @@ package connection;
 public interface configurable {
 	public final String ip="localhost",
 						port="3306",
-						name_bbdd="tienda_p66",
+						name_bbdd="tiendap66",
 						user="root",
 						psw="root",
 						driver="com.mysql.cj.jdbc.Driver";
