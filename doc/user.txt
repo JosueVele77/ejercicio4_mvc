@@ -1,0 +1,7 @@
+admin;admin1234;1
+ventas;ventas1234;2
+admin;admin1234;1
+ventas;ventas1234;2
+admin;admin1234;1
+ventas;ventas1234;2
+perez@gmail.com;admin12345_;1
